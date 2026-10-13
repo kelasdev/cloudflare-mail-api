@@ -1,0 +1,29 @@
+# Cloudflare Worker configuration — TEMPLATE.
+# Copy this file to wrangler.toml and fill in the values:
+#
+#   cp wrangler.example.toml wrangler.toml
+#
+# wrangler.toml is gitignored on purpose: it contains your real
+# database_id (and is the file `wrangler deploy` reads locally).
+
+name = "cloudflare-mail-api"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mail-api"
+# From: npx wrangler d1 create mail-api
+database_id = "REPLACE_WITH_REAL_ID"
+
+[triggers]
+# Purge expired inboxes + messages every 15 minutes.
+crons = ["*/15 * * * *"]
+
+[vars]
+# Domain you configured for Cloudflare Email Routing.
+# Emails arrive at <username>@MAIL_DOMAIN.
+MAIL_DOMAIN = "mail.example.com"
+
+# NOTE: the API key is NOT set here.
+# It is a secret: npx wrangler secret put API_KEY

@@ -1,0 +1,16 @@
+node_modules/
+.wrangler/
+dist/
+*.log
+
+# Local config: real database_id + your domain. Template: wrangler.example.toml
+wrangler.toml
+
+# Local secrets (never commit): generated API key + wrangler local vars
+.api-key
+.dev.vars
+
+# Personal tooling, not part of the repo contract
+api_client.py
+openapi.yml
+__pycache__/
